@@ -12,13 +12,19 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
-    private float direcX;
+    public float direcX;
+
+    private bool canDash = true;
+    public bool isDashing;
+    [SerializeField] private float dashingPower = 24f;
+    public float dashingTime = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
 
     [SerializeField] private LayerMask JumpableGround;
     [SerializeField] private LayerMask WallLayer;
     [SerializeField] private Transform WallCheck;
 
-    private int jumpcount = 0;
+    int Jumpcount = 0;
     private float walljumpingdirection;
     [SerializeField] private float hýz = 7f;
     [SerializeField] private float zýpla = 14f;
@@ -28,14 +34,17 @@ public class PlayerMovement : MonoBehaviour
     private float walljumpingDuration;
     [SerializeField] private Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
-    private bool facingright = true;
+    public bool facingright = true;
     private bool isWallSliding;
     private bool isWallJumping;
+
+    private int DoubleJump;
     //public bool canMove;
+
 
     [SerializeField] private AudioSource jumpSoundEffect;
 
-    private enum AnimState {idle, run, jump, fall, wallslide}
+    private enum AnimState {idle, run, jump, fall, wallslide, doublejump}
     AnimState state;
 
     private void Start()
@@ -47,9 +56,17 @@ public class PlayerMovement : MonoBehaviour
         bcoll = GetComponent<BoxCollider2D>();
     }
 
+    
 
     private void Update()
     {
+        Jumpcount = Mathf.Clamp(Jumpcount, 0, 3);
+
+        if (isDashing)
+        {
+            return;
+        }
+
         if (!isWallJumping)
         {
             direcX = Input.GetAxisRaw("Horizontal");
@@ -64,38 +81,41 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
 
-        if (Input.GetButtonDown("Jump") && GroundCheck()/* && canMove*/)
+        if (GroundCheck())
         {
-            //jumpSoundEffect.Play();
-            rb.velocity = new Vector2(rb.velocity.x, zýpla);
+            DoubleJump = 2;
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (GroundCheck() || DoubleJump > 1)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, zýpla);
+                DoubleJump--;
+            } 
         }
 
-        //if (!canMove)
-        //{
-        //    anim.SetInteger("state", 0);
-        //}
-        //else
-        //{
-        Animations();
-        //}
-        Wallslide();
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && direcX != 0)
+        {
+            anim.SetTrigger("dash");
+            StartCoroutine(Dash());
+        }
 
+        Animations();
+        Wallslide();
         WallJump();
 
     }
 
     private void WallJump()
     {
-        if (rb.velocity.y > .1f)
+        if (IsWalled())
         {
-            jumpcount++;
+            Jumpcount++;
         }
         else
         {
-            jumpcount = 0;
-
+            Jumpcount = 0;
         }
-
         if (isWallSliding)
         {
             isWallJumping = false;
@@ -107,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             walljumpingCounter -= Time.deltaTime;
         }
-        if (Input.GetButtonDown("Jump") && walljumpingCounter > 0f && jumpcount < 2)
+        if (Input.GetButtonDown("Jump") && walljumpingCounter > 0f && Jumpcount < 2)
         {
             isWallJumping = true;
             rb.velocity = new Vector2(walljumpingdirection * wallJumpingPower.x, wallJumpingPower.y);
@@ -147,25 +167,28 @@ public class PlayerMovement : MonoBehaviour
     private void Animations()
     {
 
-        if (direcX > 0f)
+        if (GroundCheck() && direcX > 0f)
         {
             state = AnimState.run;
 
         }
-        else if (direcX < 0f)
+        else if (GroundCheck() && direcX < 0f)
         {
             state = AnimState.run;
-
         }
-        else
+        else if (GroundCheck() && direcX == 0f)
         {
             state = AnimState.idle;
         }
 
 
-        if (rb.velocity.y > .01f)
+        if (rb.velocity.y > .01f && DoubleJump == 2)
         {
             state = AnimState.jump;
+        }
+        else if (rb.velocity.y > .01f && DoubleJump == 1)
+        {
+            state = AnimState.doublejump;
         }
         else if (rb.velocity.y < -.01f)
         {
@@ -183,6 +206,20 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         facingright = !facingright;
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 
     private bool GroundCheck()
