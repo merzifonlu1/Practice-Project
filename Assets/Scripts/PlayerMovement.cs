@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,45 +8,59 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Component calling section
     public Rigidbody2D rb;
     private BoxCollider2D bcoll;
     private SpriteRenderer sprite;
     private Animator anim;
-
-    public float direcX;
-
-    private bool canDash = true;
-    public bool isDashing;
-    [SerializeField] private float dashingPower = 24f;
-    public float dashingTime = 0.2f;
-    [SerializeField] private float dashingCooldown = 1f;
-
     [SerializeField] private LayerMask JumpableGround;
     [SerializeField] private LayerMask WallLayer;
     [SerializeField] private Transform WallCheck;
 
+
+    // Slide Ability Codes
+    private bool isSliding;
+    private bool canSlide = true;
+    public float slidetime = 1f;
+    [SerializeField] private float slidespeed = 14f;
+    [SerializeField] private float decreaserate = 0.85f;
+    [SerializeField] private float slidingCooldown = 5f;
+    
+
+    // Dash Ability Codes
+    private bool canDash = true;
+    public bool isDashing;
+    public float dashingTime = 0.15f;
+    [SerializeField] private float dashingPower = 56f;
+    [SerializeField] private float dashingCooldown = 1f;
+
+
+    // Wall Jump Ability Codes
     int Jumpcount = 0;
     private float walljumpingdirection;
-    [SerializeField] private float hýz = 7f;
-    [SerializeField] private float zýpla = 14f;
-    [SerializeField] private float wallslidespeed = 2f;
+    [SerializeField] private Vector2 wallJumpingPower = new Vector2(8f, 16f);
     [SerializeField] private float walljumpingTime = 2f;
     private float walljumpingCounter;
     private float walljumpingDuration;
-    [SerializeField] private Vector2 wallJumpingPower = new Vector2(8f, 16f);
-
-    public bool facingright = true;
-    private bool isWallSliding;
     private bool isWallJumping;
+   
 
+    // Wallslide Ability Codes
+    private bool isWallSliding;
+    [SerializeField] private float wallslidespeed = 2f;
+
+
+    // Player Horizantal and vertical Move Codes
+    public float direcX;
+    [SerializeField] private float hýz = 7f;
+    [SerializeField] private float zýpla = 14f;
+    public bool facingright = true;
     private int DoubleJump;
-    //public bool canMove;
 
-
-    [SerializeField] private AudioSource jumpSoundEffect;
 
     private enum AnimState {idle, run, jump, fall, wallslide, doublejump}
     AnimState state;
+
 
     private void Start()
     {
@@ -57,21 +72,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-
     private void Update()
     {
-        Jumpcount = Mathf.Clamp(Jumpcount, 0, 3);
-
         if (isDashing)
         {
             return;
         }
-
+        if (isSliding)
+        {
+            return;
+        }
+        // Horizantal Move Code
         if (!isWallJumping)
         {
             direcX = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(direcX * hýz, rb.velocity.y);
         }
+
+        // Flip Code
         if (direcX > 0f && !facingright)
         {
             Flip();
@@ -81,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
 
+        // Jumping Code
+        Jumpcount = Mathf.Clamp(Jumpcount, 0, 3);
         if (GroundCheck())
         {
             DoubleJump = 2;
@@ -94,31 +114,36 @@ public class PlayerMovement : MonoBehaviour
             } 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && direcX != 0)
+        // Dash Code
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !isDashing && direcX != 0 && !IsWalled())
         {
-            anim.SetTrigger("dash");
             StartCoroutine(Dash());
         }
-
+        
+        if (Input.GetKeyDown(KeyCode.LeftControl) && GroundCheck() && canSlide && !isSliding && direcX != 0 && !IsWalled())
+        {
+            StartCoroutine(Slide());
+        }
+   
+        
         Animations();
         Wallslide();
         WallJump();
-
     }
 
-    private void WallJump()
+    private void WallJump() 
     {
         if (IsWalled())
         {
-            Jumpcount++;
+            Jumpcount++;         // integer for double jump
         }
         else
         {
-            Jumpcount = 0;
+            Jumpcount = 0;         // integer for double jump
         }
         if (isWallSliding)
         {
-            isWallJumping = false;
+            isWallJumping = false;   
             walljumpingdirection = -transform.localScale.x;
             walljumpingCounter = walljumpingTime;
             CancelInvoke(nameof(StopWallJumping));
@@ -144,12 +169,10 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(StopWallJumping), walljumpingDuration);
         }
     }
-
-    private void StopWallJumping()
+    private void StopWallJumping() 
     {
         isWallJumping = false;
     }
-
 
     private void Wallslide()
     {
@@ -166,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Animations()
     {
-
+        // Run & Idle Animations
         if (GroundCheck() && direcX > 0f)
         {
             state = AnimState.run;
@@ -181,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
             state = AnimState.idle;
         }
 
-
+        // Vertical Move Animations
         if (rb.velocity.y > .01f && DoubleJump == 2)
         {
             state = AnimState.jump;
@@ -195,10 +218,12 @@ public class PlayerMovement : MonoBehaviour
             state = AnimState.fall;
         }
 
+        // Wallslide Animations
         if (isWallSliding)
         {
             state = AnimState.wallslide;
         }
+
         anim.SetInteger("state", (int)state);
     }
 
@@ -209,27 +234,45 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private IEnumerator Dash()
+    { 
+        canDash = false;    // Dash cooldown = dashingcooldown
+        isDashing = true;       // Dashing at the moment is on
+        anim.SetTrigger("dash");        // animation
+        float originalGravity = rb.gravityScale;         // Gravity setting to 0 for if we dash at air
+        rb.gravityScale = 0f;                           // Gravity setting to 0 for if we dash at air
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);  // applying the dash speed(power)
+        yield return new WaitForSeconds(dashingTime);     // waiting until dash completes
+        rb.gravityScale = originalGravity;         //Gravity setting back to original
+        isDashing = false;                 // Dashing at the moment is off
+        yield return new WaitForSeconds(dashingCooldown);         // Dash cooldown
+        canDash = true;          // Dash cooldown = 0
+    }
+
+    private IEnumerator Slide()
     {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        yield return new WaitForSeconds(dashingTime);
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
+        canSlide = false;
+        isSliding = true;                 // Sliding at the moment
+        bcoll.offset = new Vector2(-0.0682888f, -0.3575193f);
+        bcoll.size = new Vector2(1.637926f, 0.6921828f);
+        anim.SetBool("slide", true);      // Animation is ON     
+        rb.velocity = new Vector2(transform.localScale.x * slidespeed, rb.velocity.y);    // applying slide slow
+        yield return new WaitForSeconds(slidetime);
+        anim.SetBool("slide", false);
+        isSliding = false;
+        bcoll.offset = new Vector2(0.008831739f, -0.00955677f);
+        bcoll.size = new Vector2(0.598455f, 1.306816f);
+        yield return new WaitForSeconds(slidingCooldown);
+        canSlide = true;       
     }
 
     private bool GroundCheck()
     {
-        return Physics2D.BoxCast(bcoll.bounds.center, bcoll.bounds.size, 0f, Vector2.down, .1f, JumpableGround);
+        return Physics2D.BoxCast(bcoll.bounds.center, bcoll.bounds.size, 0f, Vector2.down, .1f, JumpableGround);     
     }
 
     private bool IsWalled()
     {
-        return Physics2D.OverlapCircle(WallCheck.position, 0.2f, WallLayer);
+        return Physics2D.OverlapCircle(WallCheck.position, 0.2f, WallLayer);     // Checking towards for nearby walls with wallcheck object in game
     }
 
 }
