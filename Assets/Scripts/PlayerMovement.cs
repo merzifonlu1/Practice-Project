@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private bool canSlide = true;
     public float slidetime = 1f;
     [SerializeField] private float slidespeed = 14f;
-    [SerializeField] private float decreaserate = 0.85f;
     [SerializeField] private float slidingCooldown = 5f;
     
 
@@ -82,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            anim.SetTrigger("attack");
+        }
         // Horizantal Move Code
         if (!isWallJumping)
         {
@@ -130,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         Wallslide();
         WallJump();
     }
+
 
     private void WallJump() 
     {
