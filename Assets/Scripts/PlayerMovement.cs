@@ -57,13 +57,23 @@ public class PlayerMovement : MonoBehaviour
     private int DoubleJump;
 
 
+    //Attack Ability Codes
+    private GameObject originalGameObject;
+    private GameObject swordCollider;
+    private BoxCollider2D sword;
+
+
     private enum AnimState {idle, run, jump, fall, wallslide, doublejump}
     AnimState state;
 
 
     private void Start()
     {
-        //canMove = true;
+        originalGameObject = GameObject.Find("Player");
+        swordCollider = originalGameObject.transform.GetChild(1).gameObject;
+        sword = swordCollider.GetComponent<BoxCollider2D>();
+        sword.enabled = false;
+
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -279,5 +289,14 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(WallCheck.position, 0.2f, WallLayer);     // Checking towards for nearby walls with wallcheck object in game
     }
 
+    void activateCollider()
+    {
+        sword.enabled = true;
+    }
+
+    void deactivateCollider()
+    {
+        sword.enabled = false;
+    }
 }
 
