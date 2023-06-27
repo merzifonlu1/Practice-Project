@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject swordCollider;
     private BoxCollider2D sword;
 
+    public PlayerHealth ph;
 
     private enum AnimState {idle, run, jump, fall, wallslide, doublejump}
     AnimState state;
@@ -83,6 +84,10 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
+        if (ph.PlayerAlive == false) 
+        {
+            return;
+        }
         if (isDashing)
         {
             return;
