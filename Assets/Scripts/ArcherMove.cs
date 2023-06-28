@@ -62,6 +62,10 @@ public class ArcherMove : MonoBehaviour
         {
             Attack();
         }
+        else
+        {
+            anim.SetBool("shoot", false);
+        }
     }
 
     private void flip()
@@ -94,7 +98,7 @@ public class ArcherMove : MonoBehaviour
 
         if (Vector2.Distance(newPos, target) < 0.1f)
         {
-            Debug.Log("arrived");
+
             arrived = true;
             isEscaping = false;
         }
