@@ -13,11 +13,12 @@ public class ArcherMove : MonoBehaviour
     private bool attackRangebool;
     private bool isEscaping;
     public bool arrived;
+
     [SerializeField] private Transform escapepoint;
     [SerializeField] private float attackRange = 10f;
     [SerializeField] private float runRange = 3f;
     [SerializeField] private float runspeed = 5f;
-
+    public ArcherScript arclife;
     void Start()
     {        
         rb = GetComponent<Rigidbody2D>();
@@ -53,14 +54,19 @@ public class ArcherMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (arclife.isDead)
+        {            
+            return;
+        }
+
         if (runRangebool && !arrived)
         {
             Escape();
         }
 
         if ((!runRangebool && attackRangebool) || (arrived && !isEscaping))
-        {
-            Attack();
+        {                     
+            Attack();            
         }
         else
         {
@@ -75,10 +81,10 @@ public class ArcherMove : MonoBehaviour
     }
 
     private void Attack()
-    {
+    {   
         anim.SetBool("running", false);
         LookAtPlayer();
-        anim.SetBool("shoot", true);
+        anim.SetBool("shoot", true);      
     }
 
     private void Escape()

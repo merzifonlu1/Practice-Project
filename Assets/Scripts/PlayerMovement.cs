@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject originalGameObject;
     private GameObject swordCollider;
     private BoxCollider2D sword;
+    private bool Canattack = true;
+    [SerializeField] private float attackcooldown = 3f;
 
     public PlayerHealth ph;
 
@@ -96,10 +98,13 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+
+        // Attack Ability
+        if (Input.GetKeyDown(KeyCode.Q) && Canattack)
         {
-            anim.SetTrigger("attack");
+            StartCoroutine(Attack());
         }
+
         // Horizantal Move Code
         if (!isWallJumping)
         {
@@ -282,6 +287,15 @@ public class PlayerMovement : MonoBehaviour
         bcoll.size = new Vector2(0.598455f, 1.306816f);
         yield return new WaitForSeconds(slidingCooldown);
         canSlide = true;       
+    }
+
+    private IEnumerator Attack()
+    {
+        Canattack = false;
+        anim.SetTrigger("attack");
+        yield return new WaitForSeconds(attackcooldown);
+        Canattack = true;
+       
     }
 
     private bool GroundCheck()

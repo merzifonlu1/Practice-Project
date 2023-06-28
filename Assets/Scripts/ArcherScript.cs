@@ -5,6 +5,8 @@ using UnityEngine;
 public class ArcherScript : MonoBehaviour
 {
     private Animator anim;
+    public bool isDead = false;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -14,7 +16,8 @@ public class ArcherScript : MonoBehaviour
     private void Die()
     {
         anim.SetTrigger("death");
-        Invoke(nameof(Delete), 3.5f);
+        Invoke(nameof(Delete), 1f);
+        isDead = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
