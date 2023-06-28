@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bear_Trap_0
       objectReference: {fileID: 0}
+    - target: {fileID: 5183308928913608599, guid: d7f2e549d37c073468f71589e5633d49, type: 3}
+      propertyPath: ph
+      value: 
+      objectReference: {fileID: 6762638074262904257}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

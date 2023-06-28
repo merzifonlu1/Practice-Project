@@ -5106,10 +5106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 532845806544770581}
-  canAttack: 1
   arrived: 0
   escapepoint: {fileID: 46793140}
-  firerate: 2
   attackRange: 15
   runRange: 4
   runspeed: 4
