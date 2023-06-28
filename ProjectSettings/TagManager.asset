@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - sword
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - UI
   - Zemin
   - Wall
-  - 
+  - Trap
   - 
   - 
   - 
@@ -41,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Zemin
+    uniqueID: 1564746273
+    locked: 0
+  - name: Trap
+    uniqueID: 1600849031
+    locked: 0
+  - name: Wall
+    uniqueID: 1333954217
     locked: 0
