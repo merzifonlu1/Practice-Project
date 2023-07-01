@@ -614,6 +614,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeTrap
       objectReference: {fileID: 0}
+    - target: {fileID: 1198167466407230007, guid: fd29147554bc2d14f91cb993c368bd29, type: 3}
+      propertyPath: ph
+      value: 
+      objectReference: {fileID: 6762638074262904257}
     - target: {fileID: 1533888495016433029, guid: fd29147554bc2d14f91cb993c368bd29, type: 3}
       propertyPath: m_RootOrder
       value: -1
