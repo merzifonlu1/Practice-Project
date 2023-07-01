@@ -24,12 +24,22 @@ public class Crossbpw : MonoBehaviour
     {
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
-            anim.SetBool("shoot", true);
-            Vector3 targetDir = player.position - transform.position;
-            targetDir.z = 0;
-            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-            Quaternion desiredRotation = Quaternion.Euler(0, 0, angle + 90);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
+            bool hasObstacle = CheckForObstacles();
+
+            if (!hasObstacle)
+            {
+                anim.SetBool("shoot", true);
+                Vector3 targetDir = player.position - transform.position;
+                targetDir.z = 0;
+                float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+                Quaternion desiredRotation = Quaternion.Euler(0, 0, angle + 90);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
+            }
+            else
+            {
+                anim.SetBool("shoot", false);
+                ReturnToBasePosition();
+            }
         }
         else
         {
@@ -46,6 +56,17 @@ public class Crossbpw : MonoBehaviour
         float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
         Quaternion desiredRotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    bool CheckForObstacles()
+    {
+        Vector2 direction = player.position - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector2.Distance(player.position, rb.position));
+        if (hit.collider != null && hit.collider.transform != player)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void shoot()
