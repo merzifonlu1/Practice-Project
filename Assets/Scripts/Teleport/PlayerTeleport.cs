@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerTeleport : MonoBehaviour
 {
     private GameObject currentTeleporter;
-    private float teleportcooldown = 0.5f;
+    [SerializeField] private float teleportcooldown = 0.1f;
     private bool CanTeleport = true;
     void Update()
     {
@@ -39,7 +39,9 @@ public class PlayerTeleport : MonoBehaviour
     private IEnumerator Teleport()
     {
         CanTeleport = false;
-        transform.position = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
+        Vector3 destination = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
+        Vector3 playerPosition = new Vector3(destination.x, transform.position.y, transform.position.z);
+        transform.position = playerPosition;
         yield return new WaitForSeconds(teleportcooldown);
         CanTeleport = true;
     }
