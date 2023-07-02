@@ -6,6 +6,7 @@ TagManager:
   tags:
   - sword
   - Trap
+  - Teleporter
   layers:
   - Default
   - TransparentFX
