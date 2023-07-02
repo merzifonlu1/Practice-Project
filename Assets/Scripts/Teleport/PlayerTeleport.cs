@@ -40,7 +40,7 @@ public class PlayerTeleport : MonoBehaviour
     {
         CanTeleport = false;
         Vector3 destination = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
-        Vector3 playerPosition = new Vector3(destination.x, transform.position.y, transform.position.z);
+        Vector3 playerPosition = new Vector3(destination.x, destination.y - 0.603f, transform.position.z);
         transform.position = playerPosition;
         yield return new WaitForSeconds(teleportcooldown);
         CanTeleport = true;
