@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerTeleport : MonoBehaviour
 {
     private GameObject currentTeleporter;
-
+    private float teleportcooldown = 0.5f;
+    private bool CanTeleport = true;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+      
+        if (currentTeleporter != null && CanTeleport)
         {
-            if (currentTeleporter != null)
-            {
-                transform.position = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
-            }
+              StartCoroutine(Teleport());
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,5 +34,13 @@ public class PlayerTeleport : MonoBehaviour
                 currentTeleporter = null;
             }
         }
+    }
+
+    private IEnumerator Teleport()
+    {
+        CanTeleport = false;
+        transform.position = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
+        yield return new WaitForSeconds(teleportcooldown);
+        CanTeleport = true;
     }
 }
