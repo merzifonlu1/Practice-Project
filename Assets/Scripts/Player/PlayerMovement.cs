@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         originalGameObject = GameObject.Find("Player");
         swordCollider = originalGameObject.transform.GetChild(1).gameObject;
         sword = swordCollider.GetComponent<BoxCollider2D>();
@@ -86,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
+        if (PauseMenu.isPaused)
+        {
+            return;
+        }
         if (ph.PlayerAlive == false) 
         {
             return;

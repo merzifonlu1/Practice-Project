@@ -5902,7 +5902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b1554bc12f86346a47b2a494848cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportcooldown: 0.2
+  teleportcooldown: 1
 --- !u!1001 &8221257840925611617
 PrefabInstance:
   m_ObjectHideFlags: 0
