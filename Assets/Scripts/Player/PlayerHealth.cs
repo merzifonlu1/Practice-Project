@@ -8,12 +8,17 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
     public bool PlayerAlive = true;
+
+    public HealthBar healthbar;
 
     void Start()
     {
         currentHealth = maxHealth;
+        healthbar.MaxHealth(maxHealth);
+
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -32,12 +37,14 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            healthbar.Sethealth(currentHealth);
             Die();
         }
 
         if (PlayerAlive)
         {
             anim.SetTrigger("takedamage");
+            healthbar.Sethealth(currentHealth);
         }
 
     }

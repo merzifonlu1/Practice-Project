@@ -20,18 +20,18 @@ public class PlayerMovement : MonoBehaviour
 
     // Slide Ability Codes
     private bool isSliding;
-    private bool canSlide = true;
+    public bool canSlide = true;
     public float slidetime = 1f;
     [SerializeField] private float slidespeed = 14f;
-    [SerializeField] private float slidingCooldown = 5f;
+    public float slidingCooldown = 5f;
     
 
     // Dash Ability Codes
-    private bool canDash = true;
+    public bool canDash = true;
     public bool isDashing;
     public float dashingTime = 0.15f;
     [SerializeField] private float dashingPower = 56f;
-    [SerializeField] private float dashingCooldown = 1f;
+    public float dashingCooldown = 1f;
 
 
     // Wall Jump Ability Codes
@@ -61,8 +61,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject originalGameObject;
     private GameObject swordCollider;
     private BoxCollider2D sword;
-    private bool Canattack = true;
-    [SerializeField] private float attackcooldown = 3f;
+    public bool Canattack = true;
+    public float attackcooldown = 3f;
 
     public PlayerHealth ph;
 
