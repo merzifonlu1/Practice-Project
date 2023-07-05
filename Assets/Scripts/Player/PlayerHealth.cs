@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public bool PlayerAlive = true;
+    public TextMeshProUGUI damagetext;
 
     public HealthBar healthbar;
 
@@ -34,6 +36,8 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        damagetext.enabled = true;
+        damagetext.text = damage.ToString();
 
         if (currentHealth <= 0)
         {
@@ -47,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
             healthbar.Sethealth(currentHealth);
         }
 
+        Invoke(nameof(textfade), 0.5f);
     }
 
     private void Die()
@@ -59,5 +64,10 @@ public class PlayerHealth : MonoBehaviour
     public void ResetLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void textfade()
+    {
+        damagetext.enabled = false;
     }
 }
