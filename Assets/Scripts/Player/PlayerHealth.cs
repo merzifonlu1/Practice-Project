@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,8 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public bool PlayerAlive = true;
     public TextMeshProUGUI damagetext;
+    Vector2 checkpointposition;
+    [SerializeField] private Transform Player;
 
     public HealthBar healthbar;
 
@@ -20,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthbar.MaxHealth(maxHealth);
 
+        checkpointposition = transform.position;
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -58,9 +62,23 @@ public class PlayerHealth : MonoBehaviour
     {
         anim.SetTrigger("death");
         rb.bodyType = RigidbodyType2D.Static;
-        PlayerAlive = false;        
+        PlayerAlive = false;
     }
 
+    public void UpdateSpawnPoint(Vector2 pos)
+    {
+        checkpointposition = pos;
+    }
+
+    public void Respawn()
+    {
+        PlayerAlive = true;
+        anim.Play("Player_Idle");
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        Player.position = checkpointposition;
+        currentHealth = maxHealth;
+        healthbar.MaxHealth(maxHealth);
+    }
     public void ResetLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
