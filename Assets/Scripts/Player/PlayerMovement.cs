@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Attack Ability
-        if (Input.GetKeyDown(KeyCode.Q) && Canattack)
+        if (Input.GetKeyDown(KeyCode.Q) && Canattack && GroundCheck())
         {
             StartCoroutine(Attack());
         }
