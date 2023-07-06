@@ -93,7 +93,7 @@ Transform:
   - {fileID: 2202473404526713486}
   - {fileID: 4233890598710263520}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8140780632299578158
 GameObject:
@@ -324,4 +324,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepoint: {fileID: 2215526079740600337}
-  arrowPrefab: {fileID: 4827031845512835299, guid: c74c2b77a49793a4eb64df37f0a95cec, type: 3}
+  arrowPrefab: {fileID: 508975115229396190, guid: c74c2b77a49793a4eb64df37f0a95cec, type: 3}
