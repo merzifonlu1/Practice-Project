@@ -232,6 +232,51 @@ Transform:
   m_Father: {fileID: 863881306}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &43512234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43512236}
+  - component: {fileID: 43512235}
+  m_Layer: 0
+  m_Name: SoundFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &43512235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43512234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68695692cb47bd74485c3f2eded65653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFXObject: {fileID: 6504399095783532192, guid: fc5a662fbfaad064a86a81e4afc7e3d6, type: 3}
+--- !u!4 &43512236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43512234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &55782416
 GameObject:
   m_ObjectHideFlags: 0
@@ -11137,6 +11182,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   WallCheck: {fileID: 637232201}
+  dashSoundClip: {fileID: 8300000, guid: eb36f9542e061c94995b7ce06870416e, type: 3}
+  attackSoundClip: {fileID: 8300000, guid: b4e8b0a88111a6f45a10598a11439cb0, type: 3}
+  jumpSoundClip: {fileID: 8300000, guid: f695549393b48734aa674aaa174348e5, type: 3}
   canSlide: 1
   slidetime: 0.5
   slidespeed: 24
