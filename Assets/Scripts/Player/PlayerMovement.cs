@@ -16,7 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask JumpableGround;
     [SerializeField] private LayerMask WallLayer;
     [SerializeField] private Transform WallCheck;
-
+    [SerializeField] private AudioClip dashSoundClip;
+    [SerializeField] private AudioClip attackSoundClip;
+    [SerializeField] private AudioClip jumpSoundClip;
 
     // Slide Ability Codes
     private bool isSliding;
@@ -108,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && Canattack && GroundCheck())
         {
             StartCoroutine(Attack());
+            SoundFXManager.Instance.PlaySoundFXClip(attackSoundClip, transform, 0.2f);
         }
 
         // Horizantal Move Code
@@ -139,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, zýpla);
                 DoubleJump--;
+                SoundFXManager.Instance.PlaySoundFXClip(jumpSoundClip, transform, 0.2f);
             } 
         }
 
@@ -146,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !isDashing && direcX != 0 && !IsWalled())
         {
             StartCoroutine(Dash());
+            SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, transform, 0.2f);
         }
         
         if (Input.GetKeyDown(KeyCode.LeftControl) && GroundCheck() && canSlide && !isSliding && direcX != 0 && !IsWalled())
