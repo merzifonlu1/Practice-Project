@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && Canattack && GroundCheck())
         {
             StartCoroutine(Attack());
-            SoundFXManager.Instance.PlaySoundFXClip(attackSoundClip, transform, 0.2f);
+            SoundFXManager.Instance.PlaySoundFXClip(attackSoundClip, transform, 1f);
         }
 
         // Horizantal Move Code
@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, zýpla);
                 DoubleJump--;
-                SoundFXManager.Instance.PlaySoundFXClip(jumpSoundClip, transform, 0.2f);
+                SoundFXManager.Instance.PlaySoundFXClip(jumpSoundClip, transform, 1f);
             } 
         }
 
@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !isDashing && direcX != 0 && !IsWalled())
         {
             StartCoroutine(Dash());
-            SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, transform, 0.2f);
+            SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, transform, 1f);
         }
         
         if (Input.GetKeyDown(KeyCode.LeftControl) && GroundCheck() && canSlide && !isSliding && direcX != 0 && !IsWalled())
