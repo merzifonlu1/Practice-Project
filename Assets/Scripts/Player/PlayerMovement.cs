@@ -79,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         swordCollider = originalGameObject.transform.GetChild(1).gameObject;
         sword = swordCollider.GetComponent<BoxCollider2D>();
         sword.enabled = false;
+        Jumpcount = 2;
 
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
