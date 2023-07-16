@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a60aae3af75e33947b8550af9378bbb9
+guid: 3084c24d49df1c1448b5dded223c8ef8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: newbossattack220-1sphase_0
+      name: newbossidle2ndpart_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6744f636e2298b488adfb5885b7424f
-      internalID: -112295551
+      spriteID: 6b6db201483931e4ea59b8d24cc852d2
+      internalID: 1403104232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossattack220-1sphase_1
+      name: newbossidle2ndpart_1
       rect:
         serializedVersion: 2
         x: 220
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8417a46fb2394884986cd5bcea72de1b
-      internalID: 154747512
+      spriteID: b195c67c74755d4419b94f9e2ad63cce
+      internalID: 892281655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossattack220-1sphase_2
+      name: newbossidle2ndpart_2
       rect:
         serializedVersion: 2
         x: 440
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4451dafce1c421d4a94ade47204cc9c4
-      internalID: 378456730
+      spriteID: edabd9778fbec8b47ad7cdaf2966974a
+      internalID: 1275343135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossattack220-1sphase_3
+      name: newbossidle2ndpart_3
       rect:
         serializedVersion: 2
         x: 660
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d00964ff0cb49494d8d753980130e980
-      internalID: 1046628584
+      spriteID: f9ad448a5bb8bcf439f4bb321135876d
+      internalID: 1309426888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossattack220-1sphase_4
+      name: newbossidle2ndpart_4
       rect:
         serializedVersion: 2
         x: 880
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b7ba1a41bf2e4b4cb82e0c29b4fbb20
-      internalID: 522254430
+      spriteID: 63bca7450a73b83428c93a031e1ced5f
+      internalID: -1008628523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossattack220-1sphase_5
+      name: newbossidle2ndpart_5
       rect:
         serializedVersion: 2
         x: 1100
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af984c05ddcf4974e93816ea58ccb787
-      internalID: 1796956316
+      spriteID: 2652ced1e5b773844ac95a323fb0c5ea
+      internalID: 1146835651
       vertices: []
       indices: 
       edges: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      newbossattack220-1sphase_0: -112295551
-      newbossattack220-1sphase_1: 154747512
-      newbossattack220-1sphase_2: 378456730
-      newbossattack220-1sphase_3: 1046628584
-      newbossattack220-1sphase_4: 522254430
-      newbossattack220-1sphase_5: 1796956316
+      newbossidle2ndpart_0: 1403104232
+      newbossidle2ndpart_1: 892281655
+      newbossidle2ndpart_2: 1275343135
+      newbossidle2ndpart_3: 1309426888
+      newbossidle2ndpart_4: -1008628523
+      newbossidle2ndpart_5: 1146835651
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

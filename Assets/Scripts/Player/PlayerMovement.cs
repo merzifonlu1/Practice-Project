@@ -272,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
     { 
         canDash = false;    // Dash cooldown = dashingcooldown
         isDashing = true;       // Dashing at the moment is on
-        anim.SetTrigger("dash");        // animation
+        anim.SetTrigger("dash");        // animation       
         float originalGravity = rb.gravityScale;         // Gravity setting to 0 for if we dash at air
         rb.gravityScale = 0f;                           // Gravity setting to 0 for if we dash at air
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);  // applying the dash speed(power)

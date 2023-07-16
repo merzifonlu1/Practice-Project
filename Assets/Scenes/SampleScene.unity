@@ -10990,10 +10990,11 @@ GameObject:
   - component: {fileID: 2142013747}
   - component: {fileID: 2142013746}
   - component: {fileID: 2142013748}
-  - component: {fileID: 2142013749}
   - component: {fileID: 2142013750}
   - component: {fileID: 2142013751}
-  m_Layer: 0
+  - component: {fileID: 2142013752}
+  - component: {fileID: 2142013753}
+  m_Layer: 9
   m_Name: Aatrox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11040,13 +11041,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -324045711, guid: f4cdc4b4df2ebe34fbc7d061016638f3, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -701849579, guid: f4cdc4b4df2ebe34fbc7d061016638f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 13.75, y: 13.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -11088,27 +11089,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2142013749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142013745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e98363a3ddc0d3547a4354df52e39a2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  rb: {fileID: 2142013751}
-  bcoll: {fileID: 2142013750}
-  FacingRight: 0
-  walkingbool: 0
-  isWalking: 0
-  runspeed: 5
-  player: {fileID: 532845806544770581}
-  attackRange: 2
 --- !u!61 &2142013750
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11139,20 +11119,20 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10518265, y: -0.087204576}
+  m_Offset: {x: -0.027750015, y: -0.18250394}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 13.75, y: 13.75}
-    newSize: {x: 4, y: 4}
+    newSize: {x: 13.75, y: 13.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7391129, y: 5.781251}
+  m_Size: {x: 2.3698235, y: 5.4715276}
   m_EdgeRadius: 0
 --- !u!50 &2142013751
 Rigidbody2D:
@@ -11166,9 +11146,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 50
+  m_LinearDrag: 1000
+  m_AngularDrag: 1000
   m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -11181,6 +11161,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
+--- !u!114 &2142013752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142013745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3986039d2302d0645a5c96dbc1b80bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 532845806544770581}
+  attackrange: 5
+  runspeed: 5
+--- !u!251 &2142013753
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142013745}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 503
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!4 &532845806544770581
 Transform:
   m_ObjectHideFlags: 0
@@ -11189,7 +11203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6302578805084210632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.27, y: -2.31, z: 0}
+  m_LocalPosition: {x: 71.25, y: -2.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11494,7 +11508,7 @@ GameObject:
   - component: {fileID: 2684510392152603887}
   - component: {fileID: 6762638074262904256}
   - component: {fileID: 6762638074262904257}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

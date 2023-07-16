@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 966a1fc70843cd24d949ccf29e21b4a4
+guid: 092c982decb8c7f43ba60d31c4b03aad
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,24 +106,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: newbossidle_0
+      name: newbossidle1stpart_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40bc6eb45b646d547a1099741fd32e17
-      internalID: -1677946797
+      spriteID: 20e01d8e6f1db2e4eba61ee0a21c8630
+      internalID: -1757349776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossidle_1
+      name: newbossidle1stpart_1
       rect:
         serializedVersion: 2
         x: 220
@@ -158,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 725237abe56e45147880d43b0bf13c2a
-      internalID: 606833438
+      spriteID: d70882826f61cb94490b5cfea4b01e82
+      internalID: 1414255809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossidle_2
+      name: newbossidle1stpart_2
       rect:
         serializedVersion: 2
         x: 440
@@ -179,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7afa18016b40a5f4fa1c4e7e0ad7a7bf
-      internalID: 1215424942
+      spriteID: 6281fc55ce946bf45aed03a78f12fcea
+      internalID: 1826878923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossidle_3
+      name: newbossidle1stpart_3
       rect:
         serializedVersion: 2
         x: 660
@@ -200,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0516b0f6e5081184fb7896ad1ab27dc8
-      internalID: 2027460756
+      spriteID: 2a2e032bb3c9a464b9427be1b5e499e8
+      internalID: 724607557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossidle_4
+      name: newbossidle1stpart_4
       rect:
         serializedVersion: 2
         x: 880
@@ -221,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d73a2f2fc456ce40a22147e73822ea0
-      internalID: -1661996968
+      spriteID: f2dcce641a6f5aa44ae92218ec0d3e25
+      internalID: 3787816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newbossidle_5
+      name: newbossidle1stpart_5
       rect:
         serializedVersion: 2
         x: 1100
@@ -242,134 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1df11dcdeaab3aa41abb70f0b1a315c6
-      internalID: -11628891
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: newbossidle_6
-      rect:
-        serializedVersion: 2
-        x: 1320
-        y: 0
-        width: 220
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d21bf2ad77869c44a072e5235d0fca9
-      internalID: 1043148624
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: newbossidle_7
-      rect:
-        serializedVersion: 2
-        x: 1540
-        y: 0
-        width: 220
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9a5753be3e8d8d40a82cfdb353b833b
-      internalID: 231374854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: newbossidle_8
-      rect:
-        serializedVersion: 2
-        x: 1760
-        y: 0
-        width: 220
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: caf51f6aea70db74a88aa9662e3e00ac
-      internalID: 771864066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: newbossidle_9
-      rect:
-        serializedVersion: 2
-        x: 1980
-        y: 0
-        width: 220
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9673931f453036642b55932d0e4b66e1
-      internalID: 1304232915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: newbossidle_10
-      rect:
-        serializedVersion: 2
-        x: 2200
-        y: 0
-        width: 220
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f289b3544b49451488f47b73e0aa44bb
-      internalID: -679137143
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: newbossidle_11
-      rect:
-        serializedVersion: 2
-        x: 2420
-        y: 0
-        width: 220
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bde4dd5283c2d174a8718b00d05f6e70
-      internalID: -528472528
+      spriteID: f3338510c4f594b46a8175c064260be1
+      internalID: 315011607
       vertices: []
       indices: 
       edges: []
@@ -385,18 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      newbossidle_0: -1677946797
-      newbossidle_1: 606833438
-      newbossidle_10: -679137143
-      newbossidle_11: -528472528
-      newbossidle_2: 1215424942
-      newbossidle_3: 2027460756
-      newbossidle_4: -1661996968
-      newbossidle_5: -11628891
-      newbossidle_6: 1043148624
-      newbossidle_7: 231374854
-      newbossidle_8: 771864066
-      newbossidle_9: 1304232915
+      newbossidle1stpart_0: -1757349776
+      newbossidle1stpart_1: 1414255809
+      newbossidle1stpart_2: 1826878923
+      newbossidle1stpart_3: 724607557
+      newbossidle1stpart_4: 3787816
+      newbossidle1stpart_5: 315011607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
