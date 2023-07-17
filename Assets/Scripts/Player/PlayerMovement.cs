@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     private enum AnimState {idle, run, jump, fall, wallslide, doublejump}
     AnimState state;
 
+    public BossMovement Boss;
 
     private void Start()
     {
@@ -95,6 +96,10 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         if (ph.PlayerAlive == false) 
+        {
+            return;
+        }
+        if (Boss.Pulsing)
         {
             return;
         }
