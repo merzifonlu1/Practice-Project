@@ -17,12 +17,15 @@ public class BossMovement : MonoBehaviour
 
     //--------Pulse Ability--------
     public bool Pulsing;
+    private bool CanPulse;
+    private bool pulsetimer;
     [SerializeField] private float pulsePower = 54f;
     [SerializeField] private Rigidbody2D playerrb;
     //-----------------------------
 
     //---------------- Attack1 Ability -----------------
-    private bool Attacking1;   
+    private bool Attacking1;
+    private bool canAttack;
     [SerializeField] private float attack1range = 4.5f;
     private GameObject Boss;
     private GameObject attack1object;
@@ -31,6 +34,9 @@ public class BossMovement : MonoBehaviour
 
     //------------------ SpinAttack Ability -------------------
     private bool Spining;
+    private bool CanSpin;
+    private bool spintimer;
+    [SerializeField] private float spinattackrange = 12f;
     [SerializeField] private float spinPower = 26f;
     private GameObject spinobject;
     private PolygonCollider2D spincoll;
@@ -49,10 +55,13 @@ public class BossMovement : MonoBehaviour
 
         //--------Pulse Ability--------
         Pulsing = false;
+        CanPulse = false;
+        pulsetimer = true;
         //-----------------------------
 
         //---------------- Attack1 Ability -----------------
         Attacking1 = false;
+        canAttack = true;
         Boss = GameObject.Find("Boss");
         attack1object = Boss.transform.GetChild(0).gameObject;
         attack1coll = attack1object.GetComponent<PolygonCollider2D>();
@@ -61,10 +70,12 @@ public class BossMovement : MonoBehaviour
 
         //------------------ SpinAttack Ability -------------------
         Spining = false;
+        CanSpin = false;
+        spintimer = true;
         Boss = GameObject.Find("Boss");
         spinobject = Boss.transform.GetChild(1).gameObject;
         spincoll = spinobject.GetComponent<PolygonCollider2D>();
-        spincoll.enabled = false;
+        spincoll.enabled = false;       
         //----------------------------------------------------------
     }
 
@@ -79,12 +90,30 @@ public class BossMovement : MonoBehaviour
         {
             CanMove = false;
         }
+
+        if ((Vector2.Distance(player.position, rb.position) > 7f) && (Vector2.Distance(player.position, rb.position) < spinattackrange))
+        {
+            CanSpin = true;
+        }
+        else
+        {
+            CanSpin = false;
+        }
+
+        if (Vector2.Distance(player.position, rb.position) < 4f)
+        {
+            CanPulse = true;
+        }
+        else
+        {
+            CanPulse = false;
+        }
     }
 
     private void FixedUpdate()
     {
+        if (Attacking1) { return; }
         if (Spining) {return;}
-        if (Attacking1) {return;}
 
         LookAtPlayer();
 
@@ -92,9 +121,20 @@ public class BossMovement : MonoBehaviour
         {
             Walk();
         }
-        else
+
+        if (!CanMove && canAttack)
         {
             StartCoroutine(Attack1());
+        }
+
+        if (CanPulse && pulsetimer)
+        {
+            StartCoroutine(Pulse());
+        }
+
+        if (CanSpin && spintimer)
+        {
+            StartCoroutine(Spinattack());
         }
 
     }
@@ -110,18 +150,23 @@ public class BossMovement : MonoBehaviour
     //---------------- Attack1 Ability -----------------
     private IEnumerator Attack1()
     {
+
+        canAttack = false;
         Attacking1 = true;
         anim.SetBool("Walking", false);        
         anim.SetTrigger("Attack1");
         yield return new WaitForSeconds(0.8f);
         Attacking1 = false;
+        yield return new WaitForSeconds(0.3f);
+        canAttack = true;
     }  
     void activateatack1Collider(){attack1coll.enabled = true;}void deactivateatack1Collider(){attack1coll.enabled = false;}void quake(){playerrb.velocity = new Vector2(0f,transform.up.y * 5f);}
     //--------------------------------------------------
 
     //------------------ Pulse Ability -------------------
-    private IEnumerator Pulse()
+    public IEnumerator Pulse()
     {
+        pulsetimer = false;
         Pulsing = true;
         anim.SetTrigger("Pulse");
         if (FacingRight)
@@ -134,14 +179,17 @@ public class BossMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(0.6f);
         Pulsing = false;
+        yield return new WaitForSeconds(4f);
+        pulsetimer = true;
     }
     //----------------------------------------------------
 
     //------------------ SpinAttack Ability -------------------
     private IEnumerator Spinattack()
     {
+        spintimer = false;
         Spining = true;
-        anim.SetTrigger("Spinattack");
+        anim.SetTrigger("Spin");
         if (FacingRight)
         {
             rb.velocity = new Vector2(1 * spinPower, rb.velocity.y);
@@ -150,8 +198,10 @@ public class BossMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(-1 * spinPower, rb.velocity.y);
         }
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.6f);
         Spining = false;
+        yield return new WaitForSeconds(8f);
+        spintimer = true;
     }
     void activatespinatackCollider(){spincoll.enabled = true;} void deactivatespinatackCollider() {spincoll.enabled = false;}
     //----------------------------------------------------------

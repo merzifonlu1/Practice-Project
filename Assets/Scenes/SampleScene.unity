@@ -2946,7 +2946,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096693504}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -3004,6 +3004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 42
+  Boss: {fileID: 2142013752}
 --- !u!4 &1108108896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2430456151871334708, guid: d7f2e549d37c073468f71589e5633d49, type: 3}
@@ -5042,6 +5043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1707852706}
   - component: {fileID: 1707852707}
+  - component: {fileID: 1707852708}
   m_Layer: 9
   m_Name: spincollider
   m_TagString: Untagged
@@ -5071,7 +5073,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707852705}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -5093,7 +5095,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5114,6 +5116,20 @@ PolygonCollider2D:
       - {x: 0.96729434, y: -1.8276954}
       - {x: 1.3105917, y: 3.9043534}
   m_UseDelaunayMesh: 0
+--- !u!114 &1707852708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707852705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b4d890b2e908845a5ecbeff6b816bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 26
+  Boss: {fileID: 2142013752}
 --- !u!1 &1728858161
 GameObject:
   m_ObjectHideFlags: 0
@@ -11172,8 +11188,8 @@ GameObject:
   - component: {fileID: 2142013748}
   - component: {fileID: 2142013750}
   - component: {fileID: 2142013751}
-  - component: {fileID: 2142013752}
   - component: {fileID: 2142013753}
+  - component: {fileID: 2142013752}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
@@ -11329,9 +11345,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -11358,9 +11374,10 @@ MonoBehaviour:
   player: {fileID: 532845806544770581}
   runspeed: 5
   Pulsing: 0
-  pulsePower: 63
+  pulsePower: 31
   playerrb: {fileID: 3851306996064567428}
   attack1range: 5
+  spinattackrange: 14
   spinPower: 26
 --- !u!251 &2142013753
 PlatformEffector2D:
@@ -11690,10 +11707,10 @@ GameObject:
   - component: {fileID: 4756145927439739505}
   - component: {fileID: 3851306996064567428}
   - component: {fileID: 6180813596098802182}
-  - component: {fileID: 6762638074262904255}
   - component: {fileID: 2684510392152603887}
-  - component: {fileID: 6762638074262904256}
+  - component: {fileID: 6762638074262904255}
   - component: {fileID: 6762638074262904257}
+  - component: {fileID: 6762638074262904256}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -11741,7 +11758,7 @@ MonoBehaviour:
   "z\u0131pla": 14
   facingright: 1
   Canattack: 1
-  attackcooldown: 3
+  attackcooldown: 1
   ph: {fileID: 6762638074262904257}
   Boss: {fileID: 2142013752}
 --- !u!114 &6762638074262904256
@@ -11771,7 +11788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e53d70948886bd47b0e9e45dc054e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   currentHealth: 0
   PlayerAlive: 1
   damagetext: {fileID: 1979572201}

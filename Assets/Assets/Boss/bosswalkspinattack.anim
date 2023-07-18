@@ -22,26 +22,26 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 1831114887, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
-    - time: 0.0625
+    - time: 0.083333336
       value: {fileID: 1312817000, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
-    - time: 0.125
+    - time: 0.16666667
       value: {fileID: 158278646, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
-    - time: 0.1875
-      value: {fileID: 2104120022, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
     - time: 0.25
+      value: {fileID: 2104120022, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
+    - time: 0.33333334
       value: {fileID: -1579086975, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
-    - time: 0.3125
+    - time: 0.41666666
       value: {fileID: -537761259, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
-    - time: 0.375
+    - time: 0.5
       value: {fileID: -852874476, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
-    - time: 0.4375
+    - time: 0.5833333
       value: {fileID: 775101794, guid: 4452c6bd361cc9f47bef53d53f6f693b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 16
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -71,7 +71,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.6666666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -92,6 +92,13 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
+    functionName: activatespinatackCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
     functionName: deactivatespinatackCollider
     data: 
     objectReferenceParameter: {fileID: 0}
