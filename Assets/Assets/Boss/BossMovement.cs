@@ -9,6 +9,8 @@ public class BossMovement : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
+    public BossHealth BH;
+
     //----------------Moving------------------
     private bool FacingRight;
     private bool CanMove;
@@ -42,6 +44,16 @@ public class BossMovement : MonoBehaviour
     private PolygonCollider2D spincoll;
     //----------------------------------------------------------
 
+    //------------------ Xray Ability -------------------
+    private bool xraytimer;
+    private bool CanXray;
+    private bool raycasting;
+    public Transform xrayfirepoint;
+    public Transform handfirepoint;
+    public GameObject xraybulletPrefab;
+    public GameObject handbulletPrefab;
+    [SerializeField] private float xrayattackrange = 15f;
+    //---------------------------------------------------
 
     void Start()
     {
@@ -75,8 +87,14 @@ public class BossMovement : MonoBehaviour
         Boss = GameObject.Find("Boss");
         spinobject = Boss.transform.GetChild(1).gameObject;
         spincoll = spinobject.GetComponent<PolygonCollider2D>();
-        spincoll.enabled = false;       
+        spincoll.enabled = false;
         //----------------------------------------------------------
+
+        //------------------ Xray Ability -------------------
+        xraytimer = true;
+        CanXray = false;
+        raycasting = false;
+        //---------------------------------------------------
     }
 
 
@@ -108,33 +126,49 @@ public class BossMovement : MonoBehaviour
         {
             CanPulse = false;
         }
+
+        if ((Vector2.Distance(player.position, rb.position) > 7f) && (Vector2.Distance(player.position, rb.position) < xrayattackrange))
+        {
+            CanXray = true;
+        }
+        else
+        {
+            CanXray = false;
+        }
+
     }
 
     private void FixedUpdate()
     {
-        if (Attacking1) { return; }
+        if (!BH.BossAlive) { return; }
+        if (Attacking1) {return;}
         if (Spining) {return;}
 
         LookAtPlayer();
 
-        if (CanMove)
+        if (CanMove && !raycasting)
         {
             Walk();
         }
 
-        if (!CanMove && canAttack)
+        if (!CanMove && canAttack && !Spining && !Pulsing && !raycasting)
         {
             StartCoroutine(Attack1());
         }
 
-        if (CanPulse && pulsetimer)
+        if (CanPulse && pulsetimer && !Spining && !Attacking1 && !raycasting)
         {
             StartCoroutine(Pulse());
         }
 
-        if (CanSpin && spintimer)
+        if (CanSpin && spintimer && !Pulsing && !Attacking1 && !raycasting)
         {
             StartCoroutine(Spinattack());
+        }
+
+        if (CanXray && xraytimer && !Pulsing && !Attacking1 && !Spining)
+        {
+            StartCoroutine(Xray());
         }
 
     }
@@ -168,6 +202,7 @@ public class BossMovement : MonoBehaviour
     {
         pulsetimer = false;
         Pulsing = true;
+        anim.SetBool("Walking", false);
         anim.SetTrigger("Pulse");
         if (FacingRight)
         {
@@ -179,7 +214,7 @@ public class BossMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(0.6f);
         Pulsing = false;
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         pulsetimer = true;
     }
     //----------------------------------------------------
@@ -189,6 +224,7 @@ public class BossMovement : MonoBehaviour
     {
         spintimer = false;
         Spining = true;
+        anim.SetBool("Walking", false);
         anim.SetTrigger("Spin");
         if (FacingRight)
         {
@@ -200,11 +236,31 @@ public class BossMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(0.6f);
         Spining = false;
+        deactivatespinatackCollider();
         yield return new WaitForSeconds(8f);
         spintimer = true;
     }
     void activatespinatackCollider(){spincoll.enabled = true;} void deactivatespinatackCollider() {spincoll.enabled = false;}
     //----------------------------------------------------------
+
+    //------------------ Xray Ability -------------------
+    private IEnumerator Xray()
+    {
+        xraytimer = false;
+        raycasting = true;
+        anim.SetBool("Walking", false);
+        anim.SetTrigger("xray");        
+        yield return new WaitForSeconds(1.6f);
+        raycasting = false;
+        yield return new WaitForSeconds(10f);
+        xraytimer = true;
+    }
+    public void shoot()
+    {
+        Instantiate(xraybulletPrefab, xrayfirepoint.position, xrayfirepoint.rotation);
+        Instantiate(handbulletPrefab, handfirepoint.position, handfirepoint.rotation);
+    }
+    //---------------------------------------------------
 
     private void flip()
     {
