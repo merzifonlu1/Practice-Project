@@ -100,7 +100,7 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(player.position, rb.position) > attack1range)
+        if (Vector2.Distance(player.position, rb.position) > attack1range && Vector2.Distance(player.position, rb.position) < 20f)
         {
             CanMove = true;
         }

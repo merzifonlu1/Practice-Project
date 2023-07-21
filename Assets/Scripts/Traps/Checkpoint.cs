@@ -5,15 +5,13 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     private Animator anim;
-    public PlayerHealth ph;
-
-    public Transform checkpoint;
-
+    public int scenenumber;
     private void Start()
     {
+        scenenumber = 0;
         anim = GetComponent<Animator>();
 
-        ph = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,7 +19,7 @@ public class Checkpoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             anim.SetTrigger("phase1");
-            ph.UpdateSpawnPoint(checkpoint.position);
+            scenenumber++;
         }
     }
 

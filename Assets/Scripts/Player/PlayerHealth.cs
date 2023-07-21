@@ -13,17 +13,17 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public bool PlayerAlive = true;
     public TextMeshProUGUI damagetext;
-    Vector2 checkpointposition;
     [SerializeField] private Transform Player;
 
     public HealthBar healthbar;
+
+    public Checkpoint checkpoint;
 
     void Start()
     {
         currentHealth = maxHealth;
         healthbar.MaxHealth(maxHealth);
 
-        checkpointposition = transform.position;
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +34,10 @@ public class PlayerHealth : MonoBehaviour
         if (!PlayerAlive)
         {
             return;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetLevel();
         }
     }
 
@@ -65,23 +69,9 @@ public class PlayerHealth : MonoBehaviour
         PlayerAlive = false;
     }
 
-    public void UpdateSpawnPoint(Vector2 pos)
-    {
-        checkpointposition = pos;
-    }
-
-    public void Respawn()
-    {
-        PlayerAlive = true;
-        anim.Play("Player_Idle");
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        Player.position = checkpointposition;
-        currentHealth = maxHealth;
-        healthbar.MaxHealth(maxHealth);
-    }
     public void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().rootCount + checkpoint.scenenumber);
     }
 
     public void textfade()
