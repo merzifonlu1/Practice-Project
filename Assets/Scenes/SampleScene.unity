@@ -1850,8 +1850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3b2acee7eb2d142a443358235153b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoint: {fileID: 1321889375}
-  speed: 8
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11905,6 +11903,7 @@ MonoBehaviour:
   damagetext: {fileID: 1979572201}
   Player: {fileID: 532845806544770581}
   healthbar: {fileID: 900196200}
+  checkpoint: {fileID: 0}
 --- !u!1001 &6890747467215716411
 PrefabInstance:
   m_ObjectHideFlags: 0

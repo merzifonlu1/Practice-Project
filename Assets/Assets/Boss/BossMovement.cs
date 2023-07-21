@@ -6,6 +6,9 @@ using UnityEngine;
 public class BossMovement : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private Transform activatepoint;
+    private bool activate;
+
     private Animator anim;
     private Rigidbody2D rb;
 
@@ -60,6 +63,8 @@ public class BossMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        activate = false;
+
         //----------------Moving------------------
         CanMove = true;
         FacingRight = false;
@@ -100,7 +105,11 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(player.position, rb.position) > attack1range && Vector2.Distance(player.position, rb.position) < 20f)
+        if (Vector2.Distance(player.position, activatepoint.position) < 1f)
+        {
+            activate = true;
+        }
+        if (Vector2.Distance(player.position, rb.position) > attack1range)
         {
             CanMove = true;
         }
@@ -140,6 +149,7 @@ public class BossMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!activate) { return; }
         if (!BH.BossAlive) { return; }
         if (Attacking1) {return;}
         if (Spining) {return;}

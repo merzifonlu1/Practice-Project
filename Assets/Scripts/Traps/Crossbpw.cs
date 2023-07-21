@@ -5,6 +5,7 @@ using UnityEngine;
 public class Crossbpw : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private AudioClip shootcrossbow;
     private Animator anim;
     private Rigidbody2D rb;
     [SerializeField] private float attackRange = 10f;
@@ -72,5 +73,6 @@ public class Crossbpw : MonoBehaviour
     public void shoot()
     {
         Instantiate(ArrowCrosPrefab, firepoint.position, firepoint.rotation);
+        SoundFXManager.Instance.PlaySoundFXClip(shootcrossbow, transform, 1f);
     }
 }

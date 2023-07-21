@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask JumpableGround;
     [SerializeField] private LayerMask WallLayer;
     [SerializeField] private Transform WallCheck;
+
+    // Audios
     [SerializeField] private AudioClip dashSoundClip;
     [SerializeField] private AudioClip attackSoundClip;
     [SerializeField] private AudioClip jumpSoundClip;
+    [SerializeField] private AudioClip slideSoundClip;
 
     // Slide Ability Codes
     private bool isSliding;
@@ -161,7 +164,9 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.LeftControl) && GroundCheck() && canSlide && !isSliding && direcX != 0 && !IsWalled())
         {
+            
             StartCoroutine(Slide());
+            SoundFXManager.Instance.PlaySoundFXClip(slideSoundClip, transform, 1f);
         }
    
         

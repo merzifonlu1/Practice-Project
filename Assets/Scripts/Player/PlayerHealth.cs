@@ -19,6 +19,9 @@ public class PlayerHealth : MonoBehaviour
 
     public Checkpoint checkpoint;
 
+    [SerializeField] private AudioClip takedamageclip;
+    [SerializeField] private AudioClip deathClip;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -51,12 +54,15 @@ public class PlayerHealth : MonoBehaviour
         {
             healthbar.Sethealth(currentHealth);
             Die();
+            SoundFXManager.Instance.PlaySoundFXClip(deathClip, transform, 1f);
         }
 
         if (PlayerAlive)
         {
+
             anim.SetTrigger("takedamage");
             healthbar.Sethealth(currentHealth);
+            SoundFXManager.Instance.PlaySoundFXClip(takedamageclip, transform, 1f);
         }
 
         Invoke(nameof(textfade), 0.5f);
@@ -71,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().rootCount + checkpoint.scenenumber);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + checkpoint.scenenumber);
     }
 
     public void textfade()
